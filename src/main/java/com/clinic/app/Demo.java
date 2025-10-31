@@ -38,6 +38,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Demo {
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         // 1) Билдер: создаём пациента с корректными полями
         Patient p1 = Patient.builder()
