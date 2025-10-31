@@ -11,9 +11,24 @@ public final class Patient extends PatientBase {
         this.address = PatientValidators.optionalAddress(address);
     }
 
-    public Patient(String csvLine) {
-        this(parseCsv(csvLine));
-    }
+//    public Patient(String csvLine) {
+//        this(parseCsv(csvLine));
+//    }
+public Patient(String csvLine) {
+    Patient p = parseCsv(csvLine);
+    // копирующее делегирование в основной конструктор
+    this(
+            p.getId(),
+            p.getLastName(),
+            p.getFirstName(),
+            p.getMiddleName(),
+            p.getBirthYear(),
+            p.getPhone(),
+            p.getEmail(),
+            p.getAddress()
+    );
+}
+
 
     private static Patient parseCsv(String line) {
         String[] a = line.split(";", -1);
@@ -51,19 +66,33 @@ public final class Patient extends PatientBase {
 
     public String getAddress() { return address; }
 
+//    @Override
+//    public String toString() {
+//        return "Patient{" +
+//                "id=" + getId() +
+//                ", lastName='" + getLastName() + ''' +
+//                ", firstName='" + getFirstName() + ''' +
+//                ", middleName='" + getMiddleName() + ''' +
+//                ", birthYear=" + getBirthYear() +
+//                ", phone='" + getPhone() + ''' +
+//                ", email='" + getEmail() + ''' +
+//                ", address='" + address + ''' +
+//                '}';
+//    }
     @Override
     public String toString() {
         return "Patient{" +
                 "id=" + getId() +
-                ", lastName='" + getLastName() + ''' +
-                ", firstName='" + getFirstName() + ''' +
-                ", middleName='" + getMiddleName() + ''' +
+                ", lastName='" + getLastName() + "'" +
+                ", firstName='" + getFirstName() + "'" +
+                ", middleName='" + getMiddleName() + "'" +
                 ", birthYear=" + getBirthYear() +
-                ", phone='" + getPhone() + ''' +
-                ", email='" + getEmail() + ''' +
-                ", address='" + address + ''' +
+                ", phone='" + getPhone() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", address='" + address + "'" +
                 '}';
     }
+
 
     public static PatientBuilder builder() { return new PatientBuilder(); }
 }
