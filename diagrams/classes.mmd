@@ -1,0 +1,19 @@
+classDiagram
+class PatientBase {
+  - UUID id
+  - String lastName
+  - String firstName
+  - String middleName
+  - int birthYear
+  - String phone
+  - String email
+}
+class Patient { - String address }
+class PatientSummary
+class PatientValidators
+class PatientBuilder
+
+PatientBase <|-- Patient
+PatientBase ..> PatientValidators
+Patient ..> PatientValidators
+Patient --> PatientBuilder
