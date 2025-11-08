@@ -30,9 +30,9 @@
 
 package com.clinic.app;
 
-import com.clinic.domain.Patient;
-import com.clinic.domain.PatientSummary;
-
+//import com.clinic.domain.Patient;
+//import com.clinic.domain.PatientSummary;
+import com.clinic.domain.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -40,7 +40,7 @@ import java.util.UUID;
 public class Demo {
     @SuppressWarnings("unused")
     public static void main(String[] args) {
-        // 1) Билдер: создаём пациента с корректными полями
+
         Patient p1 = Patient.builder()
                 .id(UUID.randomUUID())
                 .lastName("Иванов")
@@ -55,13 +55,13 @@ public class Demo {
         System.out.println("FULL:  " + p1);
         System.out.println("SHORT: " + PatientSummary.of(p1));
 
-        // 2) CSV: id;last;first;middle;birthYear;phone;email;address
+
         String csv = UUID.randomUUID()
                 + ";Петров;Игорь;;1985;;petrov@example.com;Санкт-Петербург";
         Patient p2 = new Patient(csv);
         System.out.println("CSV:   " + p2);
 
-        // 3) Map JSON: конструктор от Map<String,Object>
+
         Map<String, Object> map = new HashMap<>();
         map.put("id", UUID.randomUUID().toString());
         map.put("lastName", "Сидорова");
@@ -71,7 +71,7 @@ public class Demo {
         Patient p3 = new Patient(map);
         System.out.println("MAP:   " + p3);
 
-        // 4) JSON string: парсится через PatientValidators.simpleJsonToMap(...)
+
         String json = "{ \"id\": \"" + UUID.randomUUID() + "\", " +
                 "\"lastName\": \"Кузнецов\", " +
                 "\"firstName\": \"Кузьма\", " +

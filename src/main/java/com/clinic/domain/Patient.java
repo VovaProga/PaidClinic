@@ -16,7 +16,7 @@ public final class Patient extends PatientBase {
 //    }
 public Patient(String csvLine) {
     Patient p = parseCsv(csvLine);
-    // копирующее делегирование в основной конструктор
+
     this(
             p.getId(),
             p.getLastName(),
@@ -66,19 +66,7 @@ public Patient(String csvLine) {
 
     public String getAddress() { return address; }
 
-//    @Override
-//    public String toString() {
-//        return "Patient{" +
-//                "id=" + getId() +
-//                ", lastName='" + getLastName() + ''' +
-//                ", firstName='" + getFirstName() + ''' +
-//                ", middleName='" + getMiddleName() + ''' +
-//                ", birthYear=" + getBirthYear() +
-//                ", phone='" + getPhone() + ''' +
-//                ", email='" + getEmail() + ''' +
-//                ", address='" + address + ''' +
-//                '}';
-//    }
+
     @Override
     public String toString() {
         return "Patient{" +

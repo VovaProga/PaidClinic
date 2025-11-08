@@ -106,8 +106,9 @@ public final class PatientValidators {
     }
 
     public static String requireHumanName(String v, String field) {
-        if (v == null || v.isBlank()) throw new IllegalArgumentException(field + " is required");
-        // латиница/кириллица, дефис и апостроф, длина 1..100
+        if (v == null || v.isBlank())
+            throw new IllegalArgumentException(field + " is required");
+
         if (!v.matches("^[A-Za-zА-Яа-яЁё\\-']{1,100}$"))
             throw new IllegalArgumentException(field + " must be alphabetic (1..100)");
         return v;
@@ -155,7 +156,7 @@ public final class PatientValidators {
         Map<String, Object> map = new HashMap<>();
         if (s.isEmpty()) return map;
 
-        // разделяем по запятым с возможными пробелами
+
         String[] pairs = s.split("\\s*,\\s*");
         for (String pair : pairs) {
             String[] kv = pair.split(":", 2);
