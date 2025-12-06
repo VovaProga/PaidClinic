@@ -38,7 +38,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Demo {
-    @SuppressWarnings("unused")
     public static void main(String[] args) {
 
         Patient p1 = Patient.builder()
@@ -58,7 +57,7 @@ public class Demo {
 
         String csv = UUID.randomUUID()
                 + ";Петров;Игорь;;1985;;petrov@example.com;Санкт-Петербург";
-        Patient p2 = new Patient(csv);
+        Patient p2 = Patient.fromCsv(csv);
         System.out.println("CSV:   " + p2);
 
 
