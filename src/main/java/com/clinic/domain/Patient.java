@@ -12,9 +12,7 @@ public final class Patient extends PatientBase {
         setAddress(address); // Тут все отлично, используем сеттер
     }
 
-    // --- УДАЛИЛИ НЕРАБОЧИЙ КОНСТРУКТОР CSV ---
 
-    // Сделали метод публичным (factory method), теперь он создает объект
     public static Patient fromCsv(String line) {
         String[] a = line.split(";", -1);
         if (a.length != 8)
@@ -32,7 +30,7 @@ public final class Patient extends PatientBase {
         );
     }
 
-    // Map конструктор правильный, так как вычисления внутри this(...) разрешены
+
     public Patient(Map<String, Object> json) {
         this(
                 UUID.fromString(String.valueOf(json.get("id"))),
