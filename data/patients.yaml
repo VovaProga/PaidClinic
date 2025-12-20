@@ -1,0 +1,9 @@
+---
+- id: "f64c5dfe-bec3-409e-a076-bc7674e078a4"
+  lastName: "Тестовый"
+  firstName: "Пациент"
+  middleName: null
+  birthYear: 2000
+  phone: null
+  email: null
+  address: null

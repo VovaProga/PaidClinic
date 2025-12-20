@@ -10,10 +10,12 @@ public final class DatabaseConnection {
 
     private DatabaseConnection() {
         try {
-            // Замени на свои данные: имя_бд, логин, пароль
+            // Попробуй изменить порт на 5432, если 5433 не работает
             String url = "jdbc:postgresql://localhost:5432/clinic_db";
-            this.connection = DriverManager.getConnection(url, "postgres", "password");
+            this.connection = DriverManager.getConnection(url, "postgres", "1234");
+            System.out.println("Успешное подключение к базе данных!");
         } catch (SQLException e) {
+            System.err.println("Ошибка подключения: " + e.getMessage());
             throw new RuntimeException("Connection error", e);
         }
     }

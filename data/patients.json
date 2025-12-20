@@ -1,0 +1,10 @@
+[ {
+  "id" : "cd59cdc6-c6b2-4272-9826-55eff0c08184",
+  "lastName" : "Тестовый",
+  "firstName" : "Пациент",
+  "middleName" : null,
+  "birthYear" : 2000,
+  "phone" : null,
+  "email" : null,
+  "address" : null
+} ]

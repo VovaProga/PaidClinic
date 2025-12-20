@@ -2,7 +2,11 @@ package com.clinic.repository;
 
 import com.clinic.domain.Patient;
 import com.clinic.domain.PatientSummary;
-import java.util.*;
+import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public abstract class PatientRepFileBase {
@@ -11,6 +15,7 @@ public abstract class PatientRepFileBase {
 
     // Эти методы каждый формат (JSON/YAML) реализует по-своему
     public abstract void readFromFile();
+
     public abstract void writeToFile();
 
     // c. Получить объект по ID
@@ -19,6 +24,14 @@ public abstract class PatientRepFileBase {
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    public List<Patient> findByFullIdentity(String ln, String fn, String mn) {
+        return patients.stream()
+                .filter(p -> p.getLastName().equalsIgnoreCase(ln) &&
+                        p.getFirstName().equalsIgnoreCase(fn) &&
+                        Objects.equals(p.getMiddleName(), mn))
+                .collect(Collectors.toList());
     }
 
     // d. Получить список k по счету n объектов класса short

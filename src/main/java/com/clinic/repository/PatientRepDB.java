@@ -2,6 +2,7 @@ package com.clinic.repository;
 
 import com.clinic.domain.Patient;
 import com.clinic.domain.PatientSummary;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,9 @@ public class PatientRepDB {
         String sql = "SELECT COUNT(*) FROM patients";
         try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery(sql)) {
             if (rs.next()) return rs.getInt(1);
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return 0;
     }
 
@@ -29,7 +32,9 @@ public class PatientRepDB {
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) return mapRowToPatient(rs);
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
@@ -44,7 +49,9 @@ public class PatientRepDB {
                     results.add(PatientSummary.of(mapRowToPatient(rs)));
                 }
             }
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return results;
     }
 
@@ -60,7 +67,24 @@ public class PatientRepDB {
             ps.setString(7, p.getEmail());
             ps.setString(8, p.getAddress());
             ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Patient> findByFullIdentity(String ln, String fn, String mn) {
+        List<Patient> results = new ArrayList<>();
+        String sql = "SELECT * FROM patients WHERE last_name = ? AND first_name = ? AND middle_name = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, ln);
+            ps.setString(2, fn);
+            ps.setString(3, mn);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                results.add(mapRowToPatient(rs));
+            }
         } catch (SQLException e) { e.printStackTrace(); }
+        return results;
     }
 
     public void replaceById(UUID id, Patient p) {
@@ -75,7 +99,9 @@ public class PatientRepDB {
             ps.setString(7, p.getAddress());
             ps.setObject(8, id);
             ps.executeUpdate();
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteById(UUID id) {
@@ -83,7 +109,9 @@ public class PatientRepDB {
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setObject(1, id);
             ps.executeUpdate();
-        } catch (SQLException e) { e.printStackTrace(); }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private Patient mapRowToPatient(ResultSet rs) throws SQLException {

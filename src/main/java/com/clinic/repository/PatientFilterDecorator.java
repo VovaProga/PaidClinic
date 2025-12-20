@@ -1,6 +1,7 @@
 package com.clinic.repository;
 
 import com.clinic.domain.PatientSummary;
+import com.clinic.domain.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,11 @@ public class PatientFilterDecorator extends PatientRepositoryDecorator {
     public PatientFilterDecorator(IPatientRepository wrapped, String lastNameFilter) {
         super(wrapped);
         this.lastNameFilter = lastNameFilter;
+    }
+
+    @Override
+    public List<Patient> findByFullIdentity(String ln, String fn, String mn) {
+        return wrapped.findByFullIdentity(ln, fn, mn);
     }
 
     @Override

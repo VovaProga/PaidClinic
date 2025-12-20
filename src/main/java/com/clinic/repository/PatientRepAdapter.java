@@ -2,6 +2,7 @@ package com.clinic.repository;
 
 import com.clinic.domain.Patient;
 import com.clinic.domain.PatientSummary;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +16,11 @@ public class PatientRepAdapter implements IPatientRepository {
     @Override
     public Patient getById(UUID id) {
         return db.getById(id);
+    }
+
+    @Override
+    public List<Patient> findByFullIdentity(String ln, String fn, String mn) {
+        return db.findByFullIdentity(ln, fn, mn);
     }
 
     @Override
